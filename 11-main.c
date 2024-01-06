@@ -9,28 +9,21 @@
  */
 int main(void)
 {
-    bst_t *root;
-    bst_t *node;
+    binary_tree_t *root;
+    size_t size;
 
-    root = NULL;
-    node = bst_insert(&root, 98);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 402);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 12);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 46);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 128);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 256);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 512);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 1);
-    printf("Inserted: %d\n", node->n);
-    node = bst_insert(&root, 128);
-    printf("Node should be nil -> %p\n", (void *)node);
+    root = binary_tree_node(NULL, 98);
+    root->left = binary_tree_node(root, 12);
+    root->right = binary_tree_node(root, 402);
+    binary_tree_insert_right(root->left, 54);
+    binary_tree_insert_right(root, 128);
     binary_tree_print(root);
+
+    size = binary_tree_size(root);
+    printf("Size of %d: %lu\n", root->n, size);
+    size = binary_tree_size(root->right);
+    printf("Size of %d: %lu\n", root->right->n, size);
+    size = binary_tree_size(root->left->right);
+    printf("Size of %d: %lu\n", root->left->right->n, size);
     return (0);
 }
